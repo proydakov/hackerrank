@@ -5,7 +5,7 @@ int main()
     std::ios::sync_with_stdio(false);
 
     size_t N = 0;
-    std::cin >> N;    
+    std::cin >> N;
 
     int plus = 0;
     int minus = 0;
