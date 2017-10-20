@@ -19,7 +19,7 @@ struct item
 
 bool operator<(const item& i1, const item& i2)
 {
-    return i1.cost < i2.cost;
+    return i1.cost > i2.cost;
 }
 
 std::vector<int> dijkstra_search(const std::vector<std::vector<edge>>& graph, int start)
@@ -37,10 +37,11 @@ std::vector<int> dijkstra_search(const std::vector<std::vector<edge>>& graph, in
         const int current = top.node;
         frontier.pop();
 
-        const auto& edges = graph[current];
-        const size_t size = edges.size();
-        for(size_t i = 0; i < size; i++) {
-            const auto& e = edges[i];
+        if (top.cost > cost_so_far[current]) {
+            continue;
+        }
+
+        for(const auto& e : graph[current]) {
             const int next = e.to;
             const int cost = e.cost;
             const int new_cost = cost_so_far[current] + cost;
